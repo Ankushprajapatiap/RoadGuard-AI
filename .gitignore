@@ -29,6 +29,11 @@ Thumbs.db
 
 # Logs
 *.log
+__pycache__/
+*.py[cod]
+*.db
+*.sqlite
+*.sqlite3
 
 # Private datasets and uploaded files
 datasets/
