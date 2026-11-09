@@ -1,0 +1,784 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+@import "tailwindcss";
+
+/* =========================================
+   ROADGUARD AI — DESIGN SYSTEM
+   Light: Soft neutral + emerald
+   Night: Graphite + soft mint
+========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: 'DM Sans', 'Segoe UI', Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --brand: #087f6e;
+  --brand-hover: #06695c;
+  --brand-soft: #e3f4ef;
+  --accent: #16a58d;
+
+  --success: #16845b;
+  --warning: #a96708;
+  --danger: #c53b3b;
+  --info: #2563a8;
+
+  --radius: 14px;
+  --radius-small: 9px;
+
+  --font-body: 'DM Sans', 'Segoe UI', Arial, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif;
+}
+
+/* =========================================
+   LIGHT THEME
+========================================= */
+
+.app.light {
+  color-scheme: light;
+
+  --app-bg: #f3f6f4;
+  --sidebar-bg: #ffffff;
+  --header-bg: rgba(255, 255, 255, 0.94);
+
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --surface-hover: #f0f6f3;
+
+  --text: #1c3029;
+  --text-secondary: #52685f;
+  --text-muted: #63776f;
+
+  --border-color: #dce7e1;
+  --input-bg: #f8faf9;
+  --input-border: #cbd9d1;
+
+  --table-header: #edf4f0;
+  --table-hover: #f1f7f4;
+
+  --shadow:
+    0 2px 8px rgba(28, 48, 41, 0.045),
+    0 12px 28px rgba(28, 48, 41, 0.035);
+
+  --shadow-hover:
+    0 8px 24px rgba(28, 48, 41, 0.09);
+}
+
+/* =========================================
+   NIGHT THEME — GRAPHITE, NOT NAVY
+========================================= */
+
+.app.dark {
+  color-scheme: dark;
+
+  --app-bg: #171d1b;
+  --sidebar-bg: #202825;
+  --header-bg: rgba(32, 40, 37, 0.95);
+
+  --surface: #252f2b;
+  --surface-raised: #2b3631;
+  --surface-hover: #34423b;
+
+  --text: #edf4ef;
+  --text-secondary: #c2d0c7;
+  --text-muted: #b0c0b6;
+
+  --border-color: #3b4942;
+  --input-bg: #1d2622;
+  --input-border: #4b5b52;
+
+  --table-header: #303b35;
+  --table-hover: #303c35;
+
+  --shadow:
+    0 3px 12px rgba(0, 0, 0, 0.18),
+    0 12px 30px rgba(0, 0, 0, 0.12);
+
+  --shadow-hover:
+    0 8px 25px rgba(0, 0, 0, 0.26);
+}
+
+/* =========================================
+   GLOBAL APP
+========================================= */
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+  width: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app {
+  min-height: 100vh;
+  width: 100%;
+  font-family: var(--font-body) !important;
+  background: var(--app-bg) !important;
+  color: var(--text) !important;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.app *,
+.app *::before,
+.app *::after {
+  box-sizing: border-box;
+}
+
+/* =========================================
+   TYPOGRAPHY — READABLE IN BOTH THEMES
+========================================= */
+
+.app h1,
+.app h2,
+.app h3,
+.app h4,
+.app h5,
+.app h6 {
+  font-family: var(--font-heading) !important;
+  color: var(--text) !important;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+}
+
+.app h1 {
+  font-size: clamp(25px, 3vw, 32px);
+  font-weight: 800;
+}
+
+.app h2 {
+  font-size: clamp(20px, 2.2vw, 25px);
+  font-weight: 700;
+}
+
+.app h3 {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.app p {
+  color: var(--text-secondary);
+}
+
+.app small {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.app label {
+  color: var(--text);
+}
+
+.app strong {
+  font-weight: 700;
+}
+
+.app.dark p,
+.app.dark small,
+.app.dark label {
+  opacity: 1 !important;
+}
+
+/* Keep secondary text visible without making it too bright */
+.app.light p,
+.app.light small {
+  opacity: 1 !important;
+}
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.app aside {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--sidebar-bg) !important;
+  border-right: 1px solid var(--border-color) !important;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.025);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+}
+
+.app aside > div:first-child {
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 17px;
+}
+
+.app aside > div:first-child svg {
+  color: var(--brand) !important;
+  filter: drop-shadow(0 3px 7px rgba(8, 127, 110, 0.18));
+}
+
+.app aside > div:first-child strong {
+  font-family: var(--font-heading);
+  font-size: 17px !important;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+
+.app aside > div:first-child small {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Sidebar menu buttons */
+
+.app aside button {
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.app aside button:hover {
+  background: var(--surface-hover) !important;
+  color: var(--brand) !important;
+  transform: translateX(2px);
+}
+
+/* Active navigation item */
+.app aside button[style*="#2563eb"] {
+  background: var(--brand) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(8, 127, 110, 0.2);
+}
+
+.app aside button[style*="#2563eb"]:hover {
+  background: var(--brand-hover) !important;
+  color: #ffffff !important;
+}
+
+/* Sidebar connection panel */
+.app aside > div:last-child {
+  border: 1px solid rgba(22, 165, 141, 0.17);
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.app main > header {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  height: 68px;
+  background: var(--header-bg) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.app main > header strong {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.app main > header button {
+  color: var(--text-secondary);
+}
+
+.app main > header button:hover {
+  background: var(--surface-hover) !important;
+  color: var(--brand) !important;
+}
+
+.app main > header button[title="Toggle theme"] {
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
+
+.app main > header button[title="Toggle theme"]:hover {
+  border-color: var(--brand);
+}
+
+/* Notification dropdown */
+.app main > header [style*="position: absolute"] {
+  color: var(--text) !important;
+  background: var(--surface-raised) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-hover) !important;
+}
+
+/* =========================================
+   PAGE LAYOUT
+========================================= */
+
+.app main {
+  min-width: 0;
+  flex: 1;
+}
+
+.app main > div:last-child {
+  padding: 27px !important;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+.app main footer {
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+/* =========================================
+   PANELS AND CARDS
+========================================= */
+
+.app .panel,
+.app .stat-card,
+.app [style*="var(--panel"] {
+  background: var(--surface) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow);
+  color: var(--text);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.app .stat-card {
+  padding: 21px !important;
+  min-height: 125px;
+}
+
+.app .stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(8, 127, 110, 0.4) !important;
+}
+
+.app .stat-card h2 {
+  font-size: 29px !important;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.app .stat-card p {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.app .stat-card small {
+  font-size: 11px;
+}
+
+/* Panels that use inline style objects */
+.app [style*="var(--panel"] {
+  padding: 22px;
+}
+
+/* =========================================
+   INPUTS, SELECTS AND TEXTAREAS
+========================================= */
+
+.app input:not([type="checkbox"]):not([type="radio"]),
+.app select,
+.app textarea {
+  width: 100%;
+  min-height: 43px;
+  background: var(--input-bg) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--input-border) !important;
+  border-radius: 9px !important;
+  padding: 10px 12px !important;
+  outline: none;
+  font-size: 13px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.app input::placeholder,
+.app textarea::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 1 !important;
+}
+
+.app input:focus,
+.app select:focus,
+.app textarea:focus {
+  border-color: var(--brand) !important;
+  box-shadow: 0 0 0 3px rgba(8, 127, 110, 0.15);
+}
+
+.app select option {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.app input[type="checkbox"],
+.app input[type="radio"] {
+  accent-color: var(--brand);
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+}
+
+.app .form-field {
+  min-width: 0;
+}
+
+.app .form-field label {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: var(--text-secondary) !important;
+  margin-bottom: 7px;
+  text-transform: capitalize;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.app button {
+  font-family: var(--font-body);
+  font-weight: 600;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.app button:focus-visible,
+.app input:focus-visible,
+.app select:focus-visible,
+.app textarea:focus-visible {
+  outline: 3px solid rgba(22, 165, 141, 0.55);
+  outline-offset: 2px;
+}
+
+.app button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.app main button[style*="#2563eb"] {
+  background: var(--brand) !important;
+  color: #ffffff !important;
+  border: 1px solid var(--brand) !important;
+  border-radius: 9px;
+  box-shadow: 0 3px 8px rgba(8, 127, 110, 0.12);
+}
+
+.app main button[style*="#2563eb"]:hover {
+  background: var(--brand-hover) !important;
+  border-color: var(--brand-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 13px rgba(8, 127, 110, 0.2);
+}
+
+/* =========================================
+   TABLES — ACCIDENT RECORDS AND METRICS
+========================================= */
+
+.app table {
+  color: var(--text) !important;
+  border-collapse: separate !important;
+  border-spacing: 0;
+  font-size: 13px;
+}
+
+.app table thead {
+  background: var(--table-header);
+}
+
+.app table th {
+  color: var(--text-secondary) !important;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.app table td {
+  color: var(--text) !important;
+  vertical-align: middle;
+}
+
+.app table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.app table tbody tr:hover {
+  background: var(--table-hover);
+}
+
+.app table small {
+  color: var(--text-muted) !important;
+}
+
+/* =========================================
+   STATUS BADGES
+========================================= */
+
+.app span[style*="border-radius: 20px"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 25px;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.01em;
+  border: 1px solid currentColor;
+}
+
+/* =========================================
+   CHARTS
+========================================= */
+
+.app .recharts-wrapper {
+  font-family: var(--font-body);
+}
+
+.app .recharts-cartesian-axis-tick-value,
+.app .recharts-label {
+  fill: var(--text-secondary) !important;
+  font-size: 11px;
+}
+
+.app .recharts-cartesian-grid line {
+  stroke: var(--border-color) !important;
+  opacity: 0.8;
+}
+
+.app .recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: var(--surface-raised) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--shadow-hover);
+}
+
+.app .recharts-tooltip-label,
+.app .recharts-tooltip-item {
+  color: var(--text) !important;
+}
+
+.app .recharts-legend-item-text {
+  color: var(--text-secondary) !important;
+}
+
+/* =========================================
+   MAP
+========================================= */
+
+.app .leaflet-container {
+  z-index: 1;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  font-family: var(--font-body);
+}
+
+.app .leaflet-popup-content-wrapper,
+.app .leaflet-popup-tip {
+  background: #ffffff;
+  color: #1c3029;
+}
+
+.app .leaflet-popup-content {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.app .leaflet-control-zoom a {
+  color: #1c3029 !important;
+}
+
+/* =========================================
+   CODE / JSON OUTPUT
+========================================= */
+
+.app pre {
+  padding: 16px;
+  border-radius: 10px;
+  background: var(--input-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text);
+  font-family: Consolas, 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* =========================================
+   SCROLLBARS
+========================================= */
+
+.app * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+}
+
+.app *::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+.app *::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.app *::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 20px;
+}
+
+.app *::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* =========================================
+   RESPONSIVE — TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+  .app aside {
+    width: 225px !important;
+  }
+
+  .app main > div:last-child {
+    padding: 20px !important;
+  }
+
+  .app .stat-card {
+    padding: 17px !important;
+  }
+}
+
+/* =========================================
+   RESPONSIVE — MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+  .app {
+    min-height: 100vh;
+  }
+
+  .app aside {
+    width: 245px !important;
+    max-width: 82vw;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    height: 100dvh;
+    box-shadow: 8px 0 30px rgba(0, 0, 0, 0.16);
+  }
+
+  .app main > header {
+    height: 60px;
+    padding: 0 12px !important;
+  }
+
+  .app main > header strong {
+    font-size: 13px;
+  }
+
+  .app main > div:last-child {
+    padding: 15px !important;
+  }
+
+  .app [style*="grid-template-columns"] {
+    min-width: 0;
+  }
+
+  .app .stat-card {
+    min-height: 110px;
+    padding: 15px !important;
+  }
+
+  .app .stat-card h2 {
+    font-size: 24px !important;
+  }
+
+  .app [style*="var(--panel"] {
+    padding: 16px !important;
+    margin-bottom: 15px;
+  }
+
+  .app table {
+    font-size: 12px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 420px) {
+  .app main > div:last-child {
+    padding: 11px !important;
+  }
+
+  .app main > header {
+    padding: 0 9px !important;
+  }
+
+  .app .stat-card h2 {
+    font-size: 22px !important;
+  }
+
+  .app h2 {
+    font-size: 19px;
+  }
+
+  .app h3 {
+    font-size: 15px;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
